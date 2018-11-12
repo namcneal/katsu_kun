@@ -19,3 +19,17 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+# Use include() to add paths from the catalog application 
+from django.urls import include
+from django.urls import path
+
+urlpatterns += [
+    path('game/', include('game.urls')),
+]
+
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='/game/', permanent=True)),
+]
