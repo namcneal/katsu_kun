@@ -39,3 +39,10 @@ class Verb(models.Model):
             # The last entry in the split verb is the okurigana
             else: kanji_string += split_verb[n]
         return kanji_string
+
+class UserAttempt(models.Model):
+    managed = False
+    submitted_attempt = models.CharField(max_length = 30)
+
+    def __unicode__(self):
+        return sumitted_attempt

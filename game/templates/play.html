@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <head>
-    <title>活くん</title>
+    <title>Play Page</title>
   </head>
+
 
   <body>
     <h1>This page is where the game will be played</h1>
+
+    <form id="user-attempt" method="post" action='' autocomplete='off'>
+      <div class="field">
+        <input type="text" id="attempt" name="attempt" required>
+        <input type="submit" value="Check!" id="submit-attempt">
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      var form =$('#user-attempt');
+      var submitted_attempt=form.attr("attempt")
+
+      form.submit(function() {
+        $.ajax({
+          type:form.attr('method'),
+          url: form.attr('action')
+          data: {attempt:submitted_attempt}
+        });
+        return false;
+      });
+    </script>
+
+
   </body>
 </html>
