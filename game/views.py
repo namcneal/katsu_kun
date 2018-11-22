@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from game.models import Conjugator
+from game.models import Conjugator, Verb
 # Create your views here.
 
 def index(request):
@@ -15,6 +15,13 @@ def index(request):
 @csrf_exempt
 def play(request):
     conjugator = Conjugator()
+    verb_list = Verb.objects.all()
+
+    for verb in verb_list:
+        for x in [1,0]:
+            conjugator.set_verb(verb)
+            conjugator.ba(x)
+            print(str(conjugator))
 
     if request.is_ajax and request.method == 'POST':
         attempt = request.POST.get('attempt')
