@@ -1,5 +1,5 @@
 from django.db import models
-from random import randrange
+from random import seed, randrange
 
 # Create your models here.
 """
@@ -46,6 +46,8 @@ class Verb(models.Model):
 class Conjugator(object):
 	def __init__(self):
 		self.string = ""
+		self.original = ""
+		self.translation = ""
 		self.type   = ""
 
 		# A-Changes, i-Chances, e-Changes, Past Short Endings, Te form Endings
@@ -59,14 +61,20 @@ class Conjugator(object):
 							  'ぶ':['ば','び','べ','んだ','んで'],
 							  'る':['ら','り','れ','った','って']}
 
-		self.forms = {'regular':   self.regular,
-					  'potential': self.potential,
-					  'passive':   self.passive,
-					  'causative': self.causative,
-					  'causative-passive': self.causative_passive}
+		self.constructions = {'regular':   self.regular,
+					  		  'potential': self.potential,
+					  		  'passive':   self.passive,
+					  		  'causative': self.causative,
+					  	 	  'causative-passive': self.causative_passive}
+
+		self.forms = {'short':self.short,'masu':self.masu,
+		 			  'te':self.te,      'tai':self.tai,
+					  'tara':self.tara,  'ba':self.ba}
 
 	def set_verb(self, verb):
 		self.string = verb.dictionary_string
+		self.original = verb.dictionary_string
+		self.translation = verb.translation
 		self.type   = verb.verb_type
 
 	def regular(self):
@@ -183,7 +191,7 @@ class Conjugator(object):
 			else:
 				self.string += "ませんでした"
 
-	def te(self, non_negative):
+	def te(self, non_negative, non_past):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "て"
@@ -227,7 +235,7 @@ class Conjugator(object):
 			else:
 				self.string += "たくなかった"
 
-	def tara(self, non_negative):
+	def tara(self, non_negative, non_past):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "たら"
@@ -250,7 +258,7 @@ class Conjugator(object):
 			elif self.string_type == "kuru":
 				pass
 
-	def ba(self, non_negative):
+	def ba(self, non_negative, non_past):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "れば"
@@ -273,6 +281,31 @@ class Conjugator(object):
 			elif self.string_type == "kuru":
 				pass
 
+	def get_kanji_string(self):
+		kanji_string = ""
+		split_verb = self.string.split(";")
+
+		for n in range(len(split_verb)):
+			# Handling the kanji, so we'll only grab one character
+			if n < len(split_verb) -1: kanji_string += split_verb[n][0]
+
+			# The last entry in the split verb is the okurigana
+			else: kanji_string += split_verb[n]
+		return kanji_string
+
+	def get_kana_string(self):
+		kana_string = ""
+		split_verb = self.string.split(";")
+
+		for n in range(len(split_verb)):
+			# Handling the kanji, so we'll only grab one character
+			if n < len(split_verb) -1: kana_string += split_verb[n][2:]
+
+			# The last entry in the split verb is the okurigana
+			else: kana_string += split_verb[n]
+		return kana_string
+
+
 	def __str__(self):
 		kanji_string = ""
 		split_verb = self.string.split(";")
@@ -291,38 +324,58 @@ class Game(object):
 	def __init__(self, game_params):
 		self.game_params = game_params
 		self.conjugator = Conjugator()
-		self.types = ['ichidan', 'godan',
-					  'suru',     'kuru']
-		self.forms = ['regular',
-					  'potential',
-					  'passive',
-					  'causative',
-					  'causative-passive']
-		self.formality = ['plain', 'polite']
-		self.polarity  = ['non_negative', 'negative']
-		self.tense     = ['non_past', 'past']
-		self.conjugations = ['standard', 'te', 'tai',
-							 'tara', 'ba']
 
+		"""Filter the options based on user selection"""
+		# The types of verbs
+		self.types = list(set(['ichidan', 'godan','suru','kuru'])
+				        & set(self.game_params))
+		# Which constructions to use
+		self.constructions = list(set(['regular','potential','passive','causative','causative-passive'])
+		 			    & set(self.game_params))
+
+		# The formality, polarity, and tenses
+		self.formalities = list(set(['short', 'polite']) & set(self.game_params))
+		self.polarities  = list(set(['non-negative', 'negative']) & set(self.game_params))
+		self.tenses      = list(set(['non-past', 'past']) & set(self.game_params))
+
+		# The actual verb forms themselves
+		self.forms = list(set(['standard','te','tai','tara','ba']) & set(self.game_params))
+
+		# Create the list of verbs by selecting those of the appropriate type
 		types = list(set(self.types) & set(self.game_params))
-		type = types[randrange(len(types))]
-		del types
+		self.verbs = Verb.objects.filter(verb_type__in=types)
 
-		self.verbs = Verb.objects.filter(verb_type=type)
+
 
 	def get_conjugation(self):
+		seed()
+
 		# Get a random verb
 		verb = self.verbs[randrange(len(self.verbs))]
 		self.conjugator.set_verb(verb)
 
 		# Get a verb form
-		forms = list(set(self.forms) & set(self.game_params))
-		form = forms[randrange(len(forms))]
-		self.conjugator.forms[form]()
+		construction= self.constructions[randrange(len(self.forms))]
+		self.conjugator.constructions[construction]()
 
-		# Get a formality
+		# Get a formality and a polarity
+		formality = self.formalities[randrange(len(self.formalities))]
 
 		# Get a polarity
+		polarity = self.polarities[randrange(len(self.polarities))]
 
-		# Get a form
-		print(self.conjugator)
+		tense = self.tenses[randrange(len(self.tenses))]
+
+		# Get a construction
+		form  = self.forms[randrange(len(self.forms))]
+
+		if form == 'standard':
+			if formality == 'plain':
+				self.conjugator.short(polarity=='non-negative', tense =='non-past')
+			else:
+				self.conjugator.masu(polarity=='non-negative', tense =='non-past')
+		else:
+			self.conjugator.forms[form](polarity=='non-negative', tense =='non-past')
+
+		return(self.conjugator.original, self.conjugator.translation,
+			   self.conjugator.get_kanji_string(), self.conjugator.get_kana_string())

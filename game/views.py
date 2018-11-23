@@ -15,14 +15,12 @@ def index(request):
 @csrf_exempt
 def play(request):
     params = list(request.POST.keys())
-    print(params)
     game = Game(params)
-    game.get_conjugation()
-
-
+    for i in range(100):
+        print(game.get_conjugation())
+        
     if request.is_ajax and request.method == 'POST':
         attempt = request.POST.get('attempt')
-        print(attempt)
 
         if request.session['correct_answer'] == attempt:
             print("HORRAY")
