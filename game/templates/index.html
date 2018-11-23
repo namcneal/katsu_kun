@@ -13,12 +13,25 @@
     <h1><ruby><rb>活</rb><rt>かつ</rt></ruby>へようこそ！</h1>
   </body>
 
-  <form action='play/' method="post">
+  <form id='game-params' action='play/' method="post">
 
     <h2>1. Select Verb Forms to Use</h2>
+    <div id="verb-types">
+      <h3>Types</h3>
+      <input type="checkbox" class='verb-type' name="ichidan" value="True" checked>
+      <label for="Ichidan">Ru-Verbs</label>
+      <input type="checkbox" class='verb-type' name="godan" value="True">
+      <label for="Godan">U-Verbs</label>
+      <br>
+      <input type="checkbox" class='verb-type' name="suru" value="True">
+      <label for="Suru">~Suru</label>
+      <input type="checkbox" class='verb-type' name="kuru" value="True">
+      <label for="Kuru">~Kuru</label>
+    </div>
+
     <div id="verb-forms" class="checkbox-group" required>
       <h3>Forms</h3>
-      <input class="verb-form" type="checkbox" name="regular" value="True">
+      <input class="verb-form" type="checkbox" name="regular" value="True" checked>
       <label for="Regular">Regular</label>
       <input class="verb-form" type="checkbox" name="potential" value="True">
       <label for="Regular">Potential</label>
@@ -30,23 +43,10 @@
       <label for="Regular">Causative-Passive</label>
     </div>
 
-    <div id="verb-types">
-      <h3>Types</h3>
-      <input type="checkbox" class='verb-type' name="ichidan" value="True">
-      <label for="Ichidan">Ru-Verbs</label>
-      <input type="checkbox" class='verb-type' name="godan" value="True">
-      <label for="Godan">U-Verbs</label>
-      <br>
-      <input type="checkbox" class='verb-type' name="suru" value="True">
-      <label for="Suru">~Suru</label>
-      <input type="checkbox" class='verb-type' name="kuru" value="True">
-      <label for="Kuru">~Kuru</label>
-    </div>
-
     <h2>2. Select Conjugations to Practice</h2>
     <div id="verb-formalities">
       <h3>Formality</h3>
-      <input type="checkbox" class='verb-formality' name="short" value="True">
+      <input type="checkbox" class='verb-formality' name="short" value="True" checked>
       <label for="Short">Plain/Short</label>
       <input type="checkbox" class='verb-formailty' name="polite" value="True"
       <label for="Polte">Polite/~Masu</label>
@@ -54,7 +54,7 @@
 
     <div id="verb-polarities">
       <h3>Polarity</h3>
-      <input type="checkbox" class='verb-polarity' name="non-negative" value="True">
+      <input type="checkbox" class='verb-polarity' name="non-negative" value="True"checked>
       <label for="Short">Non-negative</label>
       <input type="checkbox" class='verb-polairty' ame="negative" value="True">
       <label for="Short">Negative</label>
@@ -62,7 +62,7 @@
 
     <div id="verb-tenses">
       <h3>Tense</h3>
-      <input type="checkbox" class='verb-tense' name="non-past" value="True">
+      <input type="checkbox" class='verb-tense' name="non-past" value="True" checked>
       <label for="Non-past">Non-past</label>
       <input type="checkbox" class='verb-tense' name="past" value="True">
       <label for="Past">Past</label>
@@ -75,6 +75,8 @@
       <br><h3>Other forms:</h3>
       <input type="checkbox" class='conjugation' name="te" value="True">
       <label for="te">~Te</label>
+      <input type="checkbox" class='conjugation' name="tai" value="True">
+      <label for="tai">~Tai</label>
       <input type="checkbox" class='conjugation' name="tara" value="True">
       <label for="tara">~Tara</label>
       <input type="checkbox" class='conjugation' name='ba' value='True'>

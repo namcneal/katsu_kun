@@ -29,5 +29,7 @@ $(document).ready( function() {
         alert("Please select at least one conjugation form to practice.");
         event.preventDefault();
       }
+      $('#game-params').serialize();
     });
+
 });

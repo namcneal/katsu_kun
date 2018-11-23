@@ -1,4 +1,5 @@
 from django.db import models
+from random import randrange
 
 # Create your models here.
 """
@@ -29,6 +30,7 @@ class Verb(models.Model):
 	genki_chapter = models.PositiveSmallIntegerField()
 	has_tai_form = models.BooleanField()
 
+
 	def __str__(self):
 		kanji_string = ""
 		split_verb = self.dictionary_string.split(";")
@@ -41,7 +43,7 @@ class Verb(models.Model):
 			else: kanji_string += split_verb[n]
 		return kanji_string
 
-class Conjugator():
+class Conjugator(object):
 	def __init__(self):
 		self.string = ""
 		self.type   = ""
@@ -57,9 +59,18 @@ class Conjugator():
 							  'ぶ':['ば','び','べ','んだ','んで'],
 							  'る':['ら','り','れ','った','って']}
 
+		self.forms = {'regular':   self.regular,
+					  'potential': self.potential,
+					  'passive':   self.passive,
+					  'causative': self.causative,
+					  'causative-passive': self.causative_passive}
+
 	def set_verb(self, verb):
 		self.string = verb.dictionary_string
 		self.type   = verb.verb_type
+
+	def regular(self):
+		pass
 
 	def potential(self):
 		if self.type == 'ichidan':
@@ -273,3 +284,45 @@ class Conjugator():
 			# The last entry in the split verb is the okurigana
 			else: kanji_string += split_verb[n]
 		return kanji_string
+
+class Game(object):
+	managaged = False
+
+	def __init__(self, game_params):
+		self.game_params = game_params
+		self.conjugator = Conjugator()
+		self.types = ['ichidan', 'godan',
+					  'suru',     'kuru']
+		self.forms = ['regular',
+					  'potential',
+					  'passive',
+					  'causative',
+					  'causative-passive']
+		self.formality = ['plain', 'polite']
+		self.polarity  = ['non_negative', 'negative']
+		self.tense     = ['non_past', 'past']
+		self.conjugations = ['standard', 'te', 'tai',
+							 'tara', 'ba']
+
+		types = list(set(self.types) & set(self.game_params))
+		type = types[randrange(len(types))]
+		del types
+
+		self.verbs = Verb.objects.filter(verb_type=type)
+
+	def get_conjugation(self):
+		# Get a random verb
+		verb = self.verbs[randrange(len(self.verbs))]
+		self.conjugator.set_verb(verb)
+
+		# Get a verb form
+		forms = list(set(self.forms) & set(self.game_params))
+		form = forms[randrange(len(forms))]
+		self.conjugator.forms[form]()
+
+		# Get a formality
+
+		# Get a polarity
+
+		# Get a form
+		print(self.conjugator)
