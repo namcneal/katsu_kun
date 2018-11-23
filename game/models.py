@@ -27,6 +27,7 @@ class Verb(models.Model):
 	translation = models.CharField(max_length = 50)
 	verb_type   = models.CharField(max_length = 10, choices=VERB_TYPES)
 	genki_chapter = models.PositiveSmallIntegerField()
+	has_tai_form = models.BooleanField()
 
 	def __str__(self):
 		kanji_string = ""

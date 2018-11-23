@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from game.models import Conjugator, Verb
 # Create your views here.
 
+@csrf_exempt
 def index(request):
     """View function for home page of site."""
     request.session['correct_answer'] = "テスト"

@@ -7,3 +7,6 @@ urlpatterns = [
     path('play/', views.play, name='play'),
     path('about/', views.about, name='about')
 ]
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()
