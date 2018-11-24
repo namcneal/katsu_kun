@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from game.models import Conjugator, Verb, Game
+import urllib, time
+
 # Create your views here.
 
 @csrf_exempt
@@ -12,21 +14,59 @@ def index(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
+# Converts a verb string into html with furigana
+def verb_string_to_html(string):
+    split_verb = string.split(";")
+    html = ""
+
+    for n in range(len(split_verb)):
+        # Handling the kanji, so we'll only grab one character
+        if n < len(split_verb) -1:
+            html += "<rb>" + split_verb[n].replace(",", "</rb><rt>") + "</rt>"
+    # The last entry in the split verb is the okurigana
+    else:
+            html += split_verb[n]
+    return html
+
+def params_to_html(param_list):
+    forms = {'standard':'standard', 'te':'~て', 'tai':'〜たい','tara':'~たら', 'ba':'~ば'}
+    tense = {'non-past':'present ', 'past':'past '}
+    polarity = {'non-negative':'positive ', 'negative':'negative '}
+    formality = {'short':'short', 'polite':'~ます'}
+    if param_list[3] in ['standard', 'tai']:
+        return [param_list[0], polarity[param_list[1]], tense[param_list[2]],
+                forms[param_list[3]], "Use the <b>%s</b> form as well" %formality[param_list[4]]]
+
+    return [param_list[0],  polarity[param_list[1]], "",
+            forms[param_list[3]], ""]
+
 @csrf_exempt
 def play(request):
-    params = list(request.POST.keys())
+    params = request.GET.keys()
     game = Game(params)
-    for i in range(100):
-        print(game.get_conjugation())
-        
+
+    if request.method == 'GET':
+        request.session['current_verb'] = game.get_conjugation()
+        request.session['html_params']  = params_to_html(request.session['current_verb'][2])
+
     if request.is_ajax and request.method == 'POST':
         attempt = request.POST.get('attempt')
 
-        if request.session['correct_answer'] == attempt:
-            print("HORRAY")
+        if attempt in request.session['current_verb'][3]:
+            request.session['current_verb'] = game.get_conjugation()
+            request.session['html_params']  = params_to_html(request.session['current_verb'][2])
+        else:
+            print(request.session['current_verb'])
 
+    context = {'verb':verb_string_to_html(request.session['current_verb'][0]),
+               'translation':request.session['current_verb'][1],
+               'construction':request.session['html_params'][0],
+               'polarity':request.session['html_params'][1],
+               'tense':request.session['html_params'][2],
+               'form':request.session['html_params'][3],
+               'formality':request.session['html_params'][4],
+              }
 
-    context = {}
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'play.html', context=context)
 

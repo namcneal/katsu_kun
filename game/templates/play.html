@@ -7,15 +7,29 @@
 
 
   <body>
-    <h1>This page is where the game will be played</h1>
-    <h2>Test</h2>
+    <center>
+      {% autoescape off %}
+      <h2><ruby>{{verb}}</ruby></h2>
+      {% endautoescape %}
+      <h4><i>{{translation}}</i></h4>
+      <hr>
 
-    <form id="user-attempt" method="post" action='' autocomplete='off'>
-      <div class="field">
-        <input type="text" id="attempt" name="attempt" required>
-        <input type="submit" value="Check!" id="submit-attempt">
+      <div id='prompt'>
+        Try conjugating this into the <b>{{construction}}</b> form's {{polarity}}{{tense}}<b>{{form}}</b> conjugation.
+        <br>
+        {% autoescape off %}
+        {{formality}}
+        {% endautoescape %}
+        <br><br>
       </div>
-    </form>
+
+      <form id="user-attempt" method="post" action='' autocomplete='off'>
+        <div class="field">
+          <input type="text" id="attempt" name="attempt" required>
+          <input type="submit" value="Check!" id="submit-attempt">
+        </div>
+      </form>
+    </center>
 
   </body>
 </html>

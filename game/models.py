@@ -191,7 +191,13 @@ class Conjugator(object):
 			else:
 				self.string += "ませんでした"
 
-	def te(self, non_negative, non_past):
+	def standard(self, non_negative, non_past, short):
+		if short:
+			conjugator.short(non_negative, non_past)
+		else:
+			conjugator.masu(non_negative, non_past)
+
+	def te(self, non_negative, non_past, short):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "て"
@@ -213,7 +219,7 @@ class Conjugator(object):
 			elif self.type == "kuru":
 				pass
 
-	def tai(self, non_negative, non_past):
+	def tai(self, non_negative, non_past, short):
 		if self.type == "ichidan":
 			self.string = self.string[:-1]
 		elif self.type == "godan":
@@ -235,7 +241,10 @@ class Conjugator(object):
 			else:
 				self.string += "たくなかった"
 
-	def tara(self, non_negative, non_past):
+		if not short:
+			self.string += "です"
+
+	def tara(self, non_negative, non_past, short):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "たら"
@@ -258,7 +267,7 @@ class Conjugator(object):
 			elif self.string_type == "kuru":
 				pass
 
-	def ba(self, non_negative, non_past):
+	def ba(self, non_negative, non_past, short):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "れば"
@@ -345,8 +354,6 @@ class Game(object):
 		types = list(set(self.types) & set(self.game_params))
 		self.verbs = Verb.objects.filter(verb_type__in=types)
 
-
-
 	def get_conjugation(self):
 		seed()
 
@@ -369,13 +376,10 @@ class Game(object):
 		# Get a construction
 		form  = self.forms[randrange(len(self.forms))]
 
-		if form == 'standard':
-			if formality == 'plain':
-				self.conjugator.short(polarity=='non-negative', tense =='non-past')
-			else:
-				self.conjugator.masu(polarity=='non-negative', tense =='non-past')
-		else:
-			self.conjugator.forms[form](polarity=='non-negative', tense =='non-past')
+		self.conjugator.forms[form](polarity=='non-negative',
+								    tense =='non-past',
+									formality == 'short')
 
 		return(self.conjugator.original, self.conjugator.translation,
-			   self.conjugator.get_kanji_string(), self.conjugator.get_kana_string())
+			   [construction, polarity, tense, form, formality],
+			   [self.conjugator.get_kanji_string(), self.conjugator.get_kana_string()])
