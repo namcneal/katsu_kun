@@ -29,14 +29,18 @@ def verb_string_to_html(string):
     return html
 
 def params_to_html(param_list):
-    forms = {'standard':'standard', 'te':'~て', 'tai':'〜たい','tara':'~たら', 'ba':'~ば'}
+    forms = {'standard':'', 'te':'~て', 'tai':'〜たい','tara':'~たら', 'ba':'~ば'}
     tense = {'non-past':'present ', 'past':'past '}
     polarity = {'non-negative':'positive ', 'negative':'negative '}
-    formality = {'short':'short', 'polite':'~ます'}
+    formality = {'short':'', 'polite':'~ます'}
 
+    if param_list[0] == 'regular':
+        param_list[0] = ""
+    else:
+        param_list[0] += "'s"
     if param_list[3] in ['standard']:
         return [param_list[0], polarity[param_list[1]], tense[param_list[2]],
-                forms[param_list[3]], "Use the <b>%s</b> form as well" %formality[param_list[4]]]
+                forms[param_list[3]], "%s" %formality[param_list[4]]]
 
     return [param_list[0],  polarity[param_list[1]], "",
             forms[param_list[3]], ""]

@@ -1,35 +1,50 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <head>
     <title>Play Page</title>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p|Noto+Serif+JP&amp;subset=japanese" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/play.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p&amp;subset=japanese" rel="stylesheet">
   </head>
 
-
   <body>
-    <center>
+    <div class="banner">
+    </div>
+    <div id="content-box">
+    <div id="left">
+      <img id="character" src="../static/resources/blank_page.png">
+    </div>
+    <div id='main'>
+      <div id='verb-box'>
       {% autoescape off %}
-      <h2><ruby>{{verb}}</ruby></h2>
+      <h2 id="verb"><ruby>{{verb}}</ruby></h2>
       {% endautoescape %}
-      <h4><i>{{translation}}</i></h4>
+      <h4 id="translation"><i>{{translation}}</i></h4>
       <hr>
-
+    </div>
       <div id='prompt'>
-        Try conjugating this into the <b>{{construction}}</b> form's {{polarity}}{{tense}}<b>{{form}}</b> conjugation.
+        Use the <b>{{construction}}</b> {{polarity}} {{tense}}<b> {{formality}} {{form}}</b>
+ conjugation.
         <br>
         {% autoescape off %}
-        {{formality}}
         {% endautoescape %}
         <br><br>
       </div>
 
+      <div id="answer">
       <form id="user-attempt" method="post" action='' autocomplete='off'>
         <div class="field">
-          <input type="text" id="attempt" name="attempt" required>
-          <input type="submit" value="Check!" id="submit-attempt">
+          <input type="text" id="attempt" name="attempt" autofocus required>
+          <input class='btn' type="submit" value="チェックする!" id="submit-attempt">
         </div>
       </form>
-    </center>
+    </div>
+  </div>
+  <div id="right">This is the right</div>
+</div>
 
   </body>
 </html>

@@ -33,3 +33,13 @@ $(document).ready( function() {
     });
 
 });
+
+function ToggleLanguage(){
+  console.log("ASDA")
+  if(document.getElementById("toggle-en").checked){
+    document.body.className ="en";
+  }
+  else if(document.getElementById("toggle-jp").checked){
+    document.body.className ="jp";
+  }
+}
