@@ -65,7 +65,7 @@ class Conjugator(object):
 					  		  'causative': self.causative,
 					  	 	  'causative-passive': self.causative_passive}
 
-		self.forms = {'standard':self.standard,
+		self.forms = {'short':self.short, 'polite':self.masu,
 		 			  'te':self.te, 'tara':self.tara,  'ba':self.ba}
 
 	def set_verb(self, verb):
@@ -231,13 +231,8 @@ class Conjugator(object):
 			else:
 				self.string += "ませんでした"
 
-	def standard(self, non_negative, non_past, short):
-		if short:
-			self.short(non_negative, non_past)
-		else:
-			self.masu(non_negative, non_past)
 
-	def te(self, non_negative, non_past, short):
+	def te(self, non_negative, non_past):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "て"
@@ -265,7 +260,7 @@ class Conjugator(object):
 				else:
 					self.string = self.string.replace('くる', 'こなくて')
 
-	def tara(self, non_negative, non_past, short):
+	def tara(self, non_negative, non_past):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "たら"
@@ -294,7 +289,7 @@ class Conjugator(object):
 				else:
 					self.string = self.string.replace('くる', 'こなかったら')
 
-	def ba(self, non_negative, non_past, short):
+	def ba(self, non_negative, non_past):
 		if non_negative:
 			if self.type == "ichidan":
 				self.string = self.string[:-1] + "れば"
@@ -373,13 +368,12 @@ class Game(object):
 		self.constructions = list(set(['regular','potential','passive','causative','causative-passive'])
 		 			    	    & set(self.game_params))
 
-		# The formality, polarity, and tenses
-		self.formalities = list(set(['short', 'polite']) & set(self.game_params))
+		# The polarity and tenses
 		self.polarities  = list(set(['non-negative', 'negative']) & set(self.game_params))
 		self.tenses      = list(set(['non-past', 'past']) & set(self.game_params))
 
-		# The actual verb forms themselves
-		self.forms = list(set(['standard','te', 'tara','ba']) & set(self.game_params))
+		# The actual verb conjugation forms themselves
+		self.forms = list(set(['short', 'polite','te', 'tara','ba']) & set(self.game_params))
 
 		# Create the list of verbs by selecting those of the appropriate type
 		types = list(set(self.types) & set(self.game_params))
@@ -400,7 +394,7 @@ class Game(object):
 
 	def get_conjugation(self):
 		seed()
-		
+
 		# Get a random verb
 		verb = self.verbs[randrange(len(self.verbs))]
 		self.conjugator.set_verb(verb)
@@ -410,7 +404,7 @@ class Game(object):
 		self.conjugator.constructions[construction]()
 
 		# Get a formality and a polarity
-		formality = self.formalities[randrange(len(self.formalities))]
+		# formality = self.formalities[randrange(len(self.formalities))]
 
 		# Get a polarity
 		polarity = self.polarities[randrange(len(self.polarities))]
@@ -421,11 +415,9 @@ class Game(object):
 		# Get a construction from standard, te, tara, ba
 		form  = self.forms[randrange(len(self.forms))]
 
-		self.conjugator.forms[form](polarity=='non-negative',
-								    tense =='non-past',
-									formality == 'short')
+		self.conjugator.forms[form](polarity, tense)
 
 		print("The answer is " + str(self.conjugator))
 		return(self.conjugator.original, self.conjugator.translation,
-			   [construction, polarity, tense, form, formality],
+			   [construction, polarity, tense, form],
 			   [self.conjugator.get_kanji_string(), self.conjugator.get_kana_string()])

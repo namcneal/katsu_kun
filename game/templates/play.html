@@ -15,8 +15,8 @@
     </div>
     <div id="content-box">
     <div id="left">
-      <img id="character" src="../static/resources/blank_page.png">
-    </div>
+      <img id="logo" src="../static/resources/logo.png">
+  </div>
     <div id='main'>
       <div id='verb-box'>
       {% autoescape off %}
@@ -43,7 +43,9 @@
       </form>
     </div>
   </div>
-  <div id="right">This is the right</div>
+  <div id="right">
+    <img id="character" src={{character}}>
+  </div>
 </div>
 
   </body>

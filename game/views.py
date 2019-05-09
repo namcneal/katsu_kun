@@ -29,10 +29,9 @@ def verb_string_to_html(string):
     return html
 
 def params_to_html(param_list):
-    forms = {'standard':'', 'te':'~て', 'tai':'〜たい','tara':'~たら', 'ba':'~ば'}
+    forms = {'short':'', 'polite':'~ます', 'te':'~て', 'tai':'〜たい','tara':'~たら', 'ba':'~ば'}
     tense = {'non-past':'present ', 'past':'past '}
     polarity = {'non-negative':'positive ', 'negative':'negative '}
-    formality = {'short':'', 'polite':'~ます'}
 
     if param_list[0] == 'regular':
         param_list[0] = ""
@@ -49,6 +48,7 @@ def params_to_html(param_list):
 def play(request):
     params = request.GET.keys()
     game = Game(params)
+    character = "../static/resources/ganbaru.png"
 
     # Process the initial submission from the homepage
     if request.method == 'GET':
@@ -59,6 +59,7 @@ def play(request):
         # Extract the parameter list from the outputted conjugation
         request.session['html_params']  = params_to_html(request.session['current_verb'][2])
 
+        character = "../static/resources/ganbaru.png"
     # Process the user's conjugation attempts
     if request.is_ajax and request.method == 'POST':
         attempt = request.POST.get('attempt')
@@ -66,8 +67,10 @@ def play(request):
         if attempt in request.session['current_verb'][3]:
             request.session['current_verb'] = game.get_conjugation()
             request.session['html_params']  = params_to_html(request.session['current_verb'][2])
+            character = "../static/resources/ganbaru.png"
         else:
             print(request.session['current_verb'])
+            character = "../static/resources/incorrect.png"
 
     # Send the proper parameters for the current conjugation to the template
     context = {'verb'        :verb_string_to_html(request.session['current_verb'][0]),
@@ -76,7 +79,8 @@ def play(request):
                'polarity'    :request.session['html_params'][1],
                'tense'       :request.session['html_params'][2],
                'form'        :request.session['html_params'][3],
-               'formality'   :request.session['html_params'][4],
+               # 'formality'   :request.session['html_params'][4],
+               'character'   :character
               }
 
     # Render the HTML template index.html with the data in the context variable

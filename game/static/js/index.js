@@ -10,11 +10,6 @@ $(document).ready( function() {
         event.preventDefault();
       }
 
-      else if($('.verb-formality:checkbox:checked').length == 0){
-        alert("Please select at least one level of formality.");
-        event.preventDefault();
-      }
-
       else if($('.verb-polarity:checkbox:checked').length == 0){
         alert("Please select positive and/or negative.");
         event.preventDefault();
