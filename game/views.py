@@ -48,7 +48,6 @@ def params_to_html(param_list):
 def play(request):
     params = request.GET.keys()
     game = Game(params)
-    character = "../static/resources/ganbaru.png"
 
     # Process the initial submission from the homepage
     if request.method == 'GET':
@@ -68,9 +67,14 @@ def play(request):
             request.session['current_verb'] = game.get_conjugation()
             request.session['html_params']  = params_to_html(request.session['current_verb'][2])
             character = "../static/resources/ganbaru.png"
+            request.session['try_count'] = 0
+
         else:
             print(request.session['current_verb'])
+            request.session['try_count'] += 1
+            print(request.session['try_count'])
             character = "../static/resources/incorrect.png"
+
 
     # Send the proper parameters for the current conjugation to the template
     context = {'verb'        :verb_string_to_html(request.session['current_verb'][0]),
@@ -79,7 +83,7 @@ def play(request):
                'polarity'    :request.session['html_params'][1],
                'tense'       :request.session['html_params'][2],
                'form'        :request.session['html_params'][3],
-               # 'formality'   :request.session['html_params'][4],
+               'try_count'   :request.session['try_count'],
                'character'   :character
               }
 

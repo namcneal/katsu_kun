@@ -1,3 +1,5 @@
+var observer = new MutationObserver(ShakeMain);
+
 $(document).ready( function() {
   var form =$('#user-attempt');
   var submitted_attempt=form.attr("attempt")
@@ -10,4 +12,6 @@ $(document).ready( function() {
     });
     return false;
   });
+
+
 });
