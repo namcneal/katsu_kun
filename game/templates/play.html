@@ -3,6 +3,7 @@
 
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="{% static 'js/play.js' %}"></script> -->
   <head>
     <title>Play Page</title>
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p|Noto+Serif+JP&amp;subset=japanese" rel="stylesheet">
@@ -38,7 +39,7 @@
       <form id="user-attempt" method="post" action='' autocomplete='off'>
         <div class="field">
           <input type="text" id="attempt" name="attempt" autofocus required>
-          <input class='btn' type="submit" value="チェックする!" id="submit-attempt">
+          <button class='btn' type="submit" id="submit-attempt">チェックする!</button>
         </div>
       </form>
     </div>

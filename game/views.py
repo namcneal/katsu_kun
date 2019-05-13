@@ -67,12 +67,9 @@ def play(request):
             request.session['current_verb'] = game.get_conjugation()
             request.session['html_params']  = params_to_html(request.session['current_verb'][2])
             character = "../static/resources/ganbaru.png"
-            request.session['try_count'] = 0
 
         else:
-            print(request.session['current_verb'])
-            request.session['try_count'] += 1
-            print(request.session['try_count'])
+            # print(request.session['current_verb'])
             character = "../static/resources/incorrect.png"
 
 
@@ -83,7 +80,6 @@ def play(request):
                'polarity'    :request.session['html_params'][1],
                'tense'       :request.session['html_params'][2],
                'form'        :request.session['html_params'][3],
-               'try_count'   :request.session['try_count'],
                'character'   :character
               }
 

@@ -18,7 +18,25 @@
         <img id="logo" src="../static/resources/logo.png">
       </div>
       <div id="right">
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        <p lang="en">
+          Welcome to <ruby>活<rt>かつ</rt>くん</ruby>, the Japanese conjugation game!
+          <br><br>
+          With ru-verbs, u-verbs, causative-passives, and a myriad of forms rolling around
+          in your head, it can be hard to keep track of all of them. Here, you can develop
+          the necessary experience with verb conjugation and improve your skills!
+          <br><br>
+          To start, simply use the buttons below to choose the types of verbs and conjugation forms you want to practice.
+          Your selected options will turn yellow. Once that's done, press "Start", and the game will
+          begin!
+        </p>
+
+        <p lang="jp">
+          <ruby>活<rt>かつ</rt></ruby>くんという日本語の活用を中心としたゲームへようこそ！
+          <br><br>
+          動詞の活用は、日本語の難しいところの一つなので、上手になるには何回も練習する必要だと言われています。ここで、
+          そう出来ます。まず、下の部分で練習したい動詞の種類や活用形などを選んで、適当なボタンを押してください。
+          選んだのは、黄色になります。そして、「スタート」を押して、他のページでゲームが始まります。
+          頑張ってください！
         </p>
       <div id="toggle">
         <input id="toggle-en" type="radio"  name="toggle-lang" onclick="ToggleLanguage()" checked>
@@ -31,7 +49,7 @@
 
   <form id='game-params' action='play/' method="get">
     <h2 lang="en">Select the type(s)verbs you want...</h3>
-    <h2 lang="jp">まず：4つの種類の中で：どれ？</h3>
+    <h2 lang="jp">まず、4つの種類の中で、何が練習したいの？</h3>
     <div class="option">
      <ul id="verb-types" class="checkbox-group" required>
       <li><input id="ichidan" name="ichidan" type="checkbox" class='verb-type' value="True" checked>
@@ -59,7 +77,7 @@
     </ul>
   </div>
   <h2 lang="en">And which constructions you want to see!</h3>
-  <h2 lang="jp">そして：動詞の形も選べるよ！</h3>
+  <h2 lang="jp">そして、動詞の形も選べるよ！</h3>
   <div class="option">
     <div id="verb-forms" class="checkbox-group" required>
       <div>
@@ -95,7 +113,7 @@
   </div>
   <div class="option" class="checkbox-group">
     <h2 lang="en">Now, pick the polarity and tense</h2>
-    <h2 lang="jp">最後に：極性と時制について考えてから．．．</h2>
+    <h2 lang="jp">最後に、極性と時制について考えてから．．．</h2>
     <div id="verb-polarities" class="checkbox-group">
       <li><input type="checkbox" class='verb-polarity' id="non-negative" name="non-negative" value="True"checked>
         <label for="non-negative">

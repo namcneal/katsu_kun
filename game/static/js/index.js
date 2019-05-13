@@ -1,5 +1,6 @@
 $(document).ready( function() {
     $("#start-btn").click( function(event) {
+
       if($('.verb-form:checkbox:checked').length == 0){
         alert("Please select at least one verb form.");
         event.preventDefault();
@@ -30,7 +31,6 @@ $(document).ready( function() {
 });
 
 function ToggleLanguage(){
-  console.log("ASDA")
   if(document.getElementById("toggle-en").checked){
     document.body.className ="en";
   }

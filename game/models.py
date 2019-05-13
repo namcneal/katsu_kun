@@ -48,7 +48,7 @@ class Conjugator(object):
 		self.translation = ""
 		self.type   = ""
 
-		# A-Changes, i-Chances, e-Changes, Past Short Endings, Te form Endings
+		# A-Changes, i-Chances, e-Changes, Ta Endings, Te form Endings
 		self.godan_endings = {'う':['わ','い','え','った','って'],
 							  'く':['か','き','け','いた','いて'],
 							  'ぐ':['が','ぎ','げ','いだ','いで'],
@@ -133,10 +133,10 @@ class Conjugator(object):
 
 	def causative_passive(self):
 		if self.type == 'ichidan':
-			self.string = self.string[:-1] + "させる"
+			self.string = self.string[:-1] + "させられる"
 		elif self.type == 'godan':
 			ending = self.string[-1]
-			self.string = self.string[:-1] + self.godan_endings[ending][0] + "せる"
+			self.string = self.string[:-1] + self.godan_endings[ending][0] + "せられる"
 		elif self.type == 'suru':
 			self.string = self.string.replace('する', 'させられる')
 		elif self.type == 'kuru':
