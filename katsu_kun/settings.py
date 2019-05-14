@@ -25,7 +25,9 @@ SECRET_KEY = '(dxgs*0tg%ym6g0*ftn(hdl%(wn3*@ers=*1gobxhv97#q*!o!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS =  ['localhost', '127.0.0.1', ' katsu-kun.herokuapp.com']
+# ALLOWED_HOSTS =  ['localhost', '127.0.0.1', ' katsu-kun.herokuapp.com']
+ALLOWED_HOSTS =  ['*']
+
 
 
 # Application definition
