@@ -58,7 +58,7 @@ def play(request):
         # Extract the parameter list from the outputted conjugation
         request.session['html_params']  = params_to_html(request.session['current_verb'][2])
 
-        character = "ganbaru"
+        character = "{% static 'resources/ganbaru.png' %}"
     # Process the user's conjugation attempts
     if request.is_ajax and request.method == 'POST':
         attempt = request.POST.get('attempt')
@@ -66,7 +66,7 @@ def play(request):
         if attempt in request.session['current_verb'][3]:
             request.session['current_verb'] = game.get_conjugation()
             request.session['html_params']  = params_to_html(request.session['current_verb'][2])
-            character = "ganbaru"
+            character = "{% static 'ganbaru/logo.png' %}"
 
         else:
             # print(request.session['current_verb'])
