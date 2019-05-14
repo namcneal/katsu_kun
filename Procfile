@@ -1,2 +1,2 @@
-web: python katsu_kun/manage.py collectstatic --noinput; bin/gunicorn_django --workers=4 --bind=0.0.0.0:$PORT katsu_kun/settings.py 
+web: python manage.py collectstatic --noinput; bin/gunicorn_django --workers=4 --bind=0.0.0.0:$PORT katsu_kun/settings.py 
 
