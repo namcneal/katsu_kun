@@ -66,11 +66,11 @@ def play(request):
         if attempt in request.session['current_verb'][3]:
             request.session['current_verb'] = game.get_conjugation()
             request.session['html_params']  = params_to_html(request.session['current_verb'][2])
-            character = "ganbaru.png"
+            character = "ganbaru"
 
         else:
             # print(request.session['current_verb'])
-            character = "incorrect.png"
+            character = "incorrect"
 
 
     # Send the proper parameters for the current conjugation to the template
