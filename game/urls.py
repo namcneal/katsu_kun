@@ -1,8 +1,5 @@
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-from django.conf.urls.defaults import patterns, include, url
-
 from . import views
 
 urlpatterns = [
@@ -13,8 +10,3 @@ urlpatterns = [
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns += staticfiles_urlpatterns()
-
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
