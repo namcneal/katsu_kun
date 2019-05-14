@@ -37,4 +37,5 @@ urlpatterns += [
     path('', RedirectView.as_view(url='/game/', permanent=True)),
 ]
 
-urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG is True:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
