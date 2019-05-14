@@ -1,1 +1,1 @@
-web: gunicorn katsu_kun.wsgi
+web: python manage.py collectstatic --noinput; gunicorn hellodjango.wsgi
