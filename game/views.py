@@ -71,7 +71,7 @@ def play(request):
 
         else:
             # print(request.session['current_verb'])
-            character = "incorrect"
+            character = "/static/resources/incorrect.png"
 
 
     # Send the proper parameters for the current conjugation to the template
