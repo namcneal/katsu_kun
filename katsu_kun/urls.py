@@ -36,6 +36,3 @@ from django.views.generic import RedirectView
 urlpatterns += [
     path('', RedirectView.as_view(url='/game/', permanent=True)),
 ]
-
-if settings.DEBUG:
-    urlpatterns += staticfiles_urlpatterns()
