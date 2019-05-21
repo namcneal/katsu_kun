@@ -20,17 +20,12 @@ body.jp :lang(en){
   height:500px;
   width: 50%;
   float: left;
-  /* align-items: center;
-  justify-content: center; */
   margin: 0 auto;
   padding: 0 0;
 }
 
 #right{
   font-family: 'Noto Serif JP', serif;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
   width: 50%;
   float: right;
   margin: 0 auto;
