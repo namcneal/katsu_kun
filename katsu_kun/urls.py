@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,11 +27,11 @@ from django.urls import include
 from django.urls import path
 
 urlpatterns += [
-    path('game/', include('game.urls')),
+    path('', include('pages.urls')),
 ]
 
-#Add URL maps to redirect the base URL to our application
-from django.views.generic import RedirectView
-urlpatterns += [
-    path('', RedirectView.as_view(url='/game/', permanent=True)),
-]
+# #Add URL maps to redirect the base URL to our application
+# from django.views.generic import RedirectView
+# urlpatterns += [
+#     path('', RedirectView.as_view(url='', permanent=True))
+#     ]
