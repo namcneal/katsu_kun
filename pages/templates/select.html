@@ -18,6 +18,7 @@
 
   <nav>
     <ul>
+    <li><img id="logo" src="{% static '/resources/logo.png' %}"><li>
     <li><a href="{% url 'home' %}"><i class="icon-home"></i>Home</a></li>
     <li><a href="{% url 'about' %}"><i class="icon-user"></i>About</a></li>
     <li><a href="{% url 'select' %}"><i class="icon-thumbs-up-alt"></i>Verb Conjugation Game</a></li>
@@ -30,31 +31,23 @@
 </header>
 
   <body class='en'>
-    <div class="main">
-      <div id="image-box">
-        <img id="logo" src="../static/resources/logo.png">
-      </div>
-      <div id="right">
+    <div id="white-background">
+      <div id="section-1">
+
+        <h1 lang="en">Welcome to the カツくん verb conjugation game!</h1><br><br>
         <p lang="en">
-          Welcome to <ruby>活<rt>かつ</rt>くん</ruby>, the Japanese conjugation game!
-          <br><br>
-          With ru-verbs, u-verbs, causative-passives, and a myriad of forms rolling around
-          in your head, it can be hard to keep track of all of them. Here, you can develop
-          the necessary experience with verb conjugation and improve your skills!
-          <br><br>
           To start, simply use the buttons below to choose the types of verbs and conjugation forms you want to practice.
           Your selected options will turn yellow. Once that's done, press "Start", and the game will
           begin!
         </p>
 
+        <h1 lang="jp">カツくんというゲームへようこそ！</h1><br><br>
         <p lang="jp">
-          <ruby>活<rt>かつ</rt></ruby>くんという日本語の活用を中心としたゲームへようこそ！
-          <br><br>
-          動詞の活用は、日本語の難しいところの一つなので、上手になるには何回も練習する必要だと言われています。ここで、
-          そう出来ます。まず、下の部分で練習したい動詞の種類や活用形などを選んで、適当なボタンを押してください。
+          まず、下の部分で練習したい動詞の種類や活用形などを選んで、適当なボタンを押してください。
           選んだのは、黄色になります。そして、「スタート」を押して、他のページでゲームが始まります。
           頑張ってください！
         </p>
+        <br><br>
       <div id="toggle">
         <input id="toggle-en" type="radio"  name="toggle-lang" onclick="ToggleLanguage()" checked>
         <label for="toggle-en">English</label>
@@ -62,7 +55,6 @@
         <label for="toggle-jp">日本語</label>
       </div>
     </div>
-  </div>
 
   <form id='game-params' action="{% url 'play' %}" method="get">
     <h2 lang="en">Select the type(s)verbs you want...</h3>
@@ -200,5 +192,7 @@
         <span lang="jp">スタート</span></button>
     </div>
   </form>
+
+</div>
 </body>
 </html>

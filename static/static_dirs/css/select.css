@@ -1,12 +1,11 @@
 *{text-decoration:none; list-style:none; margin:0px; padding:0px; outline:none;}
 
-/*For the Header!*/
-header{width:100%; display:table; background-color: #001632; position:fixed; font-family: 'Open Sans', sans-serif; z-index: 10;}
-nav{width:auto; float:left;;margin-left: 100px;}
+header{width:100%; position: fixed; display:table; position:fixed; background-color: #001632; z-index: 10;}
+nav{width:auto; float:left;;margin-left: 50px; }
 nav ul{display:table; float:right;}
 nav ul li{float:left;}
 nav ul li:last-child{padding-right:0px;}
-nav ul li a{color:#ffffff; font-size:18px; padding: 25px 20px; display:inline-block; transition: all 0.5s ease 0s;}
+nav ul li a{color:#ffffff; font-size:22px; padding: 40px 25px; display:inline-block; transition: all 0.5s ease 0s;}
 nav ul li a:hover{background-color:#002e5b; color:#fde428; transition: all 0.5s ease 0s;}
 nav ul li a:hover i{color:#fde428; transition: all 0.5s ease 0s;}
 nav ul li a i{padding-right:10px; color:#002e5b; transition: all 0.5s ease 0s;}
@@ -63,10 +62,31 @@ h1 {padding: 20px 0px;}
 
 /*----------------------------------------------------------------------------------*/
 
-body {
-  /* background-color: #9ff09f; */
-  /* background-color: Lavender; */
-  background-color: #376FB6;
+body{
+  background: url("/static/resources/about/background_larger.svg") center center no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*transform: rotate(180deg);*/
+}
+
+nav #logo{
+  height: 100px;
+  width: auto;
+  margin: 0 auto;
+
+  padding: 0 20px;
+}
+
+#white-background{
+  padding-top: 200px;
+  padding-bottom: 50px;
+  background-color: rgba(255,255,255, .96);
+  margin: 0 auto;
+  
+  width: 90%;
+  min-height: 100%;
 }
 
 body.en :lang(jp) {
@@ -76,34 +96,11 @@ body.jp :lang(en){
   display: none;
 }
 
-.main{
-  columns: 2;
-   padding-top: 100px; 
-}
-
-#image-box{
-  height:500px;
-  width: 50%;
+#section-1{
+  width: 80%;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  padding: 0 0;
-}
-
-#right{
-  font-family: 'Noto Serif JP', serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0 20px;
-
-}
-
-#logo{
-  height: 90%;
-  margin: 0 auto;
-  padding: 20px 20px;
 }
 
 body.en p{
@@ -154,11 +151,22 @@ body.jp p{
   width: 90%;
 }
 
-h2 {
+h1, h2{
   text-align: center;
   font-family: 'M PLUS 1p', sans-serif;
-  font-size: 30px;
-  font-weight: normal;
+  /*font-weight: normal;*/
+}
+
+h1{
+  font-style: 60px;
+}
+h2 {
+    font-size: 30px;
+}
+
+p{
+  margin: 0 auto;
+  font-family: "Noto Serif JP", serif;
 }
 
 
@@ -166,7 +174,6 @@ h2 {
   display: inline-block;
   width:45%;
 }
-
 
 
 input{
