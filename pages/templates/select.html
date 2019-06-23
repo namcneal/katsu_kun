@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homepage</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/select.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{% static 'js/select.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p|Noto+Serif+JP&amp;subset=japanese" rel="stylesheet">
+
+  </head>
+
+  <header>
+<!-- <section>
+    <label for="toggle-1" class="toggle-menu"></label>
+    <input type="checkbox" id="toggle-1"> -->
+
+  <nav>
+    <ul>
+    <li><a href="{% url 'home' %}"><i class="icon-home"></i>Home</a></li>
+    <li><a href="{% url 'about' %}"><i class="icon-user"></i>About</a></li>
+    <li><a href="{% url 'select' %}"><i class="icon-thumbs-up-alt"></i>Verb Conjugation Game</a></li>
+    <li><a href="#services"><i class="icon-gear"></i>Adjective Game</a></li>
+    <li><a href="#gallery"><i class="icon-picture"></i>Useful Resources</a></li>
+    <li><a href="#contact"><i class="icon-phone"></i>Contact</a></li>
+    </ul>
+  </nav>
+<!-- </section> -->
+</header>
+
+  <body class='en'>
+    <div class="main">
+      <div id="image-box">
+        <img id="logo" src="../static/resources/logo.png">
+      </div>
+      <div id="right">
+        <p lang="en">
+          Welcome to <ruby>活<rt>かつ</rt>くん</ruby>, the Japanese conjugation game!
+          <br><br>
+          With ru-verbs, u-verbs, causative-passives, and a myriad of forms rolling around
+          in your head, it can be hard to keep track of all of them. Here, you can develop
+          the necessary experience with verb conjugation and improve your skills!
+          <br><br>
+          To start, simply use the buttons below to choose the types of verbs and conjugation forms you want to practice.
+          Your selected options will turn yellow. Once that's done, press "Start", and the game will
+          begin!
+        </p>
+
+        <p lang="jp">
+          <ruby>活<rt>かつ</rt></ruby>くんという日本語の活用を中心としたゲームへようこそ！
+          <br><br>
+          動詞の活用は、日本語の難しいところの一つなので、上手になるには何回も練習する必要だと言われています。ここで、
+          そう出来ます。まず、下の部分で練習したい動詞の種類や活用形などを選んで、適当なボタンを押してください。
+          選んだのは、黄色になります。そして、「スタート」を押して、他のページでゲームが始まります。
+          頑張ってください！
+        </p>
+      <div id="toggle">
+        <input id="toggle-en" type="radio"  name="toggle-lang" onclick="ToggleLanguage()" checked>
+        <label for="toggle-en">English</label>
+        <input id="toggle-jp" type="radio"  name="toggle-lang" onclick="ToggleLanguage()">
+        <label for="toggle-jp">日本語</label>
+      </div>
+    </div>
+  </div>
+
+  <form id='game-params' action="{% url 'play' %}" method="get">
+    <h2 lang="en">Select the type(s)verbs you want...</h3>
+    <h2 lang="jp">まず、4つの種類の中で、何が練習したいの？</h3>
+    <div class="option">
+     <ul id="verb-types" class="checkbox-group" required>
+      <li><input id="ichidan" name="ichidan" type="checkbox" class='verb-type' value="True" checked>
+        <label for="ichidan">
+          <span lang="en">Ru-Verbs</span>
+          <span lang="jp">一段</span>
+        </label>
+      </li>
+      <li><input id="godan"  name="godan" type="checkbox" class='verb-type'value="True" checked>
+        <label for="godan">
+          <span lang="en">U-Verbs</span>
+          <span lang="jp">五段</span>
+        </label>
+      </li>
+      <li><input type="checkbox" name="suru"class='verb-type' id="suru" value="True" checked>
+      <label for="suru">
+      <span lang="en">~Suru</span>
+      <span lang="jp">〜する</span></li>
+      </label>
+      <li><input type="checkbox" name="kuru" class='verb-type' id="kuru" value="True" checked>
+      <label for="kuru">
+      <span lang="en">~Kuru</span>
+      <span lang="jp">〜くる</label></li>
+      </label>
+    </ul>
+  </div>
+  <h2 lang="en">And which constructions you want to see!</h3>
+  <h2 lang="jp">そして、動詞の形も選べるよ！</h3>
+  <div class="option">
+    <div id="verb-forms" class="checkbox-group" required>
+      <div>
+      <input class="verb-form" type="checkbox" id="regular" name="regular" value="True" checked>
+        <label for="regular">
+          <span lang="en">Dictionary</span>
+          <span lang="jp">辞書形（普通）</span>
+        </label>
+      <input class="verb-form" type="checkbox" id="potential" name="potential" value="True">
+        <label for="potential">
+          <span lang="en">Potential</span>
+          <span lang="jp">可能形（られる）</span>
+        </label>
+      </div>
+      <div>
+      <input class="verb-form" type="checkbox" id="passive" name="passive" value="True">
+        <label for="passive">
+          <span lang="en">Passive</span>
+          <span lang="jp">受身形（られる）</span>
+        </label>
+      <input class="verb-form" type="checkbox" id="causative" name="causative" value="True">
+        <label for="causative">
+          <span lang="en">Causative</span>
+          <span lang="jp">使役形（させる）</span>
+        </label>
+      <input class="verb-form" type="checkbox" id="causative-passive" name="causative-passive" value="True">
+        <label for="causative-passive">
+          <span lang="en">Causative-Passive</span>
+          <span lang="jp">使役受身（させられる）</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="option" class="checkbox-group">
+    <h2 lang="en">Now, pick the polarity and tense</h2>
+    <h2 lang="jp">最後に、極性と時制について考えてから．．．</h2>
+    <div id="verb-polarities" class="checkbox-group">
+      <li><input type="checkbox" class='verb-polarity' id="non-negative" name="non-negative" value="True"checked>
+        <label for="non-negative">
+          <span lang="en">Non-Negative</span>
+          <span lang="jp">肯定</span>
+        </label>
+      </li>
+      <li><input type="checkbox" class='verb-polairty' id="negative" name="negative" value="True">
+        <label for="negative">
+          <span lang="en">Negative</span>
+          <span lang="jp">否定</span>
+        </label>
+      </li>
+      <li> <input type="checkbox" class='verb-tense' id="non-past" name="non-past" value="True" checked>
+        <label for="non-past">
+          <span lang="en">Non-Past</span>
+          <span lang="jp">非過去</span>
+        </label>
+      </li>
+      <li><input type="checkbox" class='verb-tense' id="past" name="past" value="True">
+        <label for="past">
+          <span lang='en'>Past</span>
+          <span lang='jp'>過去</span>
+        </label>
+      </li>
+    </div>
+  </div>
+
+    <h2 lang="en">And finally choose which forms to practice!</h2>
+    <h2 lang="jp">特別な形を選んでください</h2>
+    <div id="conjugations" class="checkbox-group">
+    <div>
+      <input type="checkbox" class='conjugation' id="short" name="short" value="True" checked>
+      <label for="short">
+        <span lang="en">Plain / Short</span>
+        <span lang="jp">だ体</span>
+      </label>
+      <input type="checkbox" class='conjugation' id="polite" name="polite" value="True">
+      <label for="polite">
+        <span lang="en">Polite / ~Masu</span>
+        <span lang="jp">です/ます体</span>
+      </label>
+    </div>
+    <div>
+      <input type="checkbox" class='conjugation' id="te" name="te" value="True">
+      <label for="te">
+        <span lang="en">~Te</span>
+        <span lang="jp">て形</span>
+      </label>
+      <input type="checkbox" class='conjugation' id="tara" name="tara" value="True">
+        <label for="tara">
+        <span lang="en">~Tara</span>
+        <span lang="jp">たら形</span>
+      </label>
+      <input type="checkbox" class='conjugation' id='ba' name="ba" value='True'>
+      <label for="ba">
+        <span lang="en">~Ba</span>
+        <span lang="jp">ば形</span>
+      </label>
+    </div>
+    </div>
+
+    <div class="button">
+      <br><br>
+      <button type="submit" id="start-btn">
+        <span lang="en">Start!</span>
+        <span lang="jp">スタート</span></button>
+    </div>
+  </form>
+</body>
+</html>

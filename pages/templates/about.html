@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+	<title>About the Project</title>
+	<link rel="stylesheet" href="{% static 'css/about.css' %}">
+</head>
+
+
+
+<body> 
+<header>
+<!-- <section>
+		<label for="toggle-1" class="toggle-menu"></label>
+		<input type="checkbox" id="toggle-1"> -->
+
+	<nav>
+		<ul>
+		<li><img id="logo" src="{% static '/resources/logo.png' %}"><li>
+		<li><a href="{% url 'home' %}"><i class="icon-home"></i>Home</a></li>
+		<li><a href="{% url 'about' %}"><i class="icon-user"></i>About</a></li>
+		<li><a href="{% url 'select' %}"><i class="icon-thumbs-up-alt"></i>Verb Conjugation Game</a></li>
+		<li><a href="#services"><i class="icon-gear"></i>Adjective Game</a></li>
+		<li><a href="#gallery"><i class="icon-picture"></i>Useful Resources</a></li>
+		<li><a href="#contact"><i class="icon-phone"></i>Contact</a></li>
+		</ul>
+	</nav>
+<!-- </section> -->
+</header>
+
+<div class="contents">
+  <div id=white-background>
+
+  	<h1>What is カツくん？</h1>
+  	<p >
+   Japanese has a reputation among English-speakers for being a difficult language to learn. With three unique systems of writing melding together, an intricate grammar, and influences from both Chinese and English, getting a firm grasp on the language can be a challenge even for the most seasoned language learner. In particular, <b>conjugation can be one of the tougher parts to get used to</b>. To help learners improve at this essential skill, I teamed up with a couple of university classmates to create a verb conjugation game for a final project. From there the game evolved into a pet project and has been through several iterations, with this website as the final incarnation, probably. 
+	</p>
+
+	<h1>Using the Website</h1>
+
+	<p>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum ipsum ac erat sodales vehicula. Aenean varius ligula enim, sed malesuada lacus cursus molestie. Aliquam molestie ex in lorem bibendum, id hendrerit purus dignissim. Praesent pellentesque eleifend condimentum. Nunc non congue arcu, et euismod dolor. Cras lorem ipsum, consectetur ut ultrices quis, molestie sed dolor. Ut elit tellus, dignissim eget molestie sit amet, vehicula nec mi. Nam pellentesque nisi eu eros dignissim mollis. Suspendisse at purus risus. Pellentesque ornare dictum dui, vel placerat nisl ullamcorper sit amet. Morbi egestas laoreet orci, nec pulvinar velit luctus in. Praesent in tellus non massa imperdiet pharetra in id risus. Suspendisse leo urna, porttitor at tortor eu, scelerisque aliquet mi. Proin massa dui, volutpat id eros ac, consequat accumsan massa. Quisque pretium quam sit amet velit scelerisque accumsan.
+	</p>
+
+	<h1>A Bit about Japanese Conjugation</h1>
+
+	<p>
+	Even though I've hyped up the difficulty of its grammar, Japanese verb conjugation itself actually follows remarklably regular patterns and can be fairly easy to undertand. The most important lesson is that Japanese verbs are like train cars. You start with the "base" of the verb, the part that carries the core meaning, and add on different cars to give more nuanced meaning, such as specifying tense.
+	</p>
+
+	<img id="train" class = "center" src="https://d20aeo683mqd6t.cloudfront.net/wp-content/uploads/2014/09/pixta_12129270_S.jpg">
+	<text class="center">Japanese verbs in their natural habitat.</text>
+
+   <p> As an example, take the verb 食べる (<i>taberu</i>) which can be translated to mean "eat":</p>
+
+   	<img class="center" src="{% static 'resources/about/taberu.svg' %}">
+
+   	<p>
+   	The "core" of the verb is 食べ (<roma>tabe</roma>), while the last character る specifies that we are using the present/future tense. This is called the <b>dictionary</b> form of the verb ,because its the form that you'll see listed in dictionarys, and it can encompass a variety of meanings and uses. For example, I can pop this verb into a full sentence to say that "I eat sushi" or "I will eat sushi", depending on the context. 
+   </p>
+ 		<div class="sentence">
+ 		私がお寿司を食べる。<br>
+ 		<roma>Watashi ga o-sushi o taberu</roma><br>
+ 		I do not eat sushi.
+ 		</div>
+ 	<p>
+   	Now, let's say I had sushi for dinner yesterday. If I want to tell you all about my delicous meal,  I'll need to take advantage of the the Japanese tense marker ~た (<roma>ta</roma>) and convert my sentence into 
+ 	</p>
+ 		<div class="sentence">
+ 		昨日、私がお寿司を食べた。<br>
+ 		<roma>Watashi ga o-sushi o tabeta</roma><br>
+ 		</div>
+
+ 	<p>
+ 	<img class="center" src="{% static 'resources/about/tabeta.svg' %}">
+
+   	By swapping out the train car, I've <b>kept the big-picture meaning of "eat" and expressed it in the past tense </b>.
+
+ 	This is the gist of Japanese verb conjugation. In fact, Japanese adjectives work much in the same way, just with a different set of endings and rules. In linguistic terms, we can call Japanese an <b>agglunative language</b>, as it creates words by stringing together the individual units of meaning and gluing them together. As simple as the concept may seem, we can keep creating endings and combining them in creative ways to express whatever we may hope to say. This becomes apparent if you realize that we aren't limited to the single endings that we've seen so far with る and た. Instead, there are some cases when the grammar allows us to combine two different endings and mix their meanings. 
+ 	<br><br>
+
+ 	As another quick example to illustrate, we can talk about negatives. To negate my original sentence, I can utilize the ending 〜ない (<roma>nai</roma>) that turns "eat" into "not eat". In this new scenario, I'm leaning more toward pizza and want to express my newfound preference as:
+ 	</p>
+ 		<div class="sentence">
+ 		昨日、私がお寿司を食べない。<br>
+ 		<roma>Watashi ga o-sushi o tabenai</roma><br>
+ 		I do/will not eat sushi.
+ 		</div>
+ 	
+ 	<img class="center" src="{% static 'resources/about/tabenai.svg' %}">
+ 	<p>
+ 	In my illustration, you'll see that I have separated the ending out into two train cars. Without going into too much detail, the な carries the actual negation while the い serves to express the present/future tense, kind of like る does. With this in mind, once again, we can send this verb into the past with a simple switch of endings. The unit that carries the past tense ending in this case will be  ~かった (<roma>katta</roma>), which serves the same function as its cousin 〜た from earlier, just with some extra baggage that makes the ending a bit longer. 
+
+ 	Having formed our newly minted three-piece verb, we can use it in a sentence:
+
+ 	</p>
+ 	 	<div class="sentence">
+	 		昨日、私がお寿司を食べなかった。<br>
+	 		<roma>Watashi ga o-sushi o tabenakatta</roma>)<br>
+	 		Yesterday, I did not eat sushi. 
+ 		</div>
+ 	<img class="center" src="{% static 'resources/about/tabenakatta.svg' %}">
+
+
+  </div>
+  
+</div>
+</body>
+</html>
