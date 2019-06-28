@@ -96,25 +96,41 @@ body.jp :lang(en){
   display: none;
 }
 
-#section-1{
+.section{
   width: 80%;
-  align-items: center;
-  justify-content: center;
   margin: 0 auto;
+ padding-top: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+
 }
 
 body.en p{
   text-align: justify;
-  width: 80%;
+  width: 60%;
   font-size: 22px;
   padding-top: 40px;
 }
 
 body.jp p{
   text-align: justify;
-  width: 80%;
+  width: 60%;
   font-size: 25px;
   padding-top: 40px;
+}
+
+
+.checkbox-group li{
+  display: inline-block;
+  width:45%;
+}
+
+
+.checkbox-group{
+  text-align: center;
 }
 
 
@@ -126,29 +142,29 @@ body.jp p{
 }
 
 .option{
-  width: 70%;
-  margin:0px auto;
-}
-
-#verb-forms{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin:0px auto;
-
-}
-#verb-forms div {
-  width: 90%;
-}
-#conjugations{
-  margin: 0 auto;
   width: 50%;
+  margin:0px auto;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-around;
   align-items: center;
+
 }
-#conjugations div{
-  width: 90%;
+
+#verb-forms, #verb-forms-2{
+  display: grid;
+  margin:0px auto;
+
+}
+
+.row{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#causative, #causative-passive{
+	grid-row:2;
 }
 
 h1, h2{
@@ -162,17 +178,12 @@ h1{
 }
 h2 {
     font-size: 30px;
+    padding-bottom: 20px;
 }
 
 p{
   margin: 0 auto;
   font-family: "Noto Serif JP", serif;
-}
-
-
-.checkbox-group li{
-  display: inline-block;
-  width:45%;
 }
 
 
@@ -185,11 +196,11 @@ label {
   display: block;
   position: relative;
   margin: 15px;
-  padding: 15px 30px 15px 62px;
+  padding: 15px 30px;
   border: 3px solid #fff;
   border-radius: 100px;
   color: #fff;
-  background-color: #6a8494;
+  background-color: #848484;
   box-shadow: 0 0 20px rgba(0, 0, 0, .2);
   font-family: 'M PLUS 1p', sans-serif;
   font-size: 25px;
@@ -197,14 +208,16 @@ label {
   cursor: pointer;
   user-select: none;
   transition: background-color .2s, box-shadow .2s;
+  text-align: center;
+  min-width:  100px;
 }
 
-label::before {
+/*label::before {
   content: '';
   display: block;
   position: absolute;
-  /* top: 10px;
-  bottom: 10px; */
+   top: 10px;
+  bottom: 10px; 
   vertical-align: center;
   left: 15px;
   width: 25px;
@@ -212,25 +225,22 @@ label::before {
   border: 3px solid #fff;
   border-radius: 100px;
   transition: background-color .2s;
-}
+}*/
 
 input:checked + label {
   background-color: #ffe44e;
   color: #000;
 }
-
+/*
 input:checked + label::before {
   background-color: #fff;
 }
-
+*/
 
 label:hover, input:focus + label {
   box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 }
 
-.checkbox-group{
-  text-align: center;
-}
 
 /* Reset */
 button {

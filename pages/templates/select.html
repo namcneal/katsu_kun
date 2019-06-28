@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Homepage</title>
+    <title>Conjugation Game</title>
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/select.css' %}">
@@ -32,64 +32,69 @@
 
   <body class='en'>
     <div id="white-background">
-      <div id="section-1">
+      <h1 lang="en">Welcome to the カツくん verb conjugation game!</h1>
+      <p lang="en">
+        To start, simply use the buttons below to choose the types of verbs and conjugation forms you want to practice.
+        Your selected options will turn yellow. Once that's done, press "Start", and the game will
+        begin!
+      </p>
 
-        <h1 lang="en">Welcome to the カツくん verb conjugation game!</h1><br><br>
-        <p lang="en">
-          To start, simply use the buttons below to choose the types of verbs and conjugation forms you want to practice.
-          Your selected options will turn yellow. Once that's done, press "Start", and the game will
-          begin!
-        </p>
+      <h1 lang="jp">カツくんというゲームへようこそ！</h1>
+      <p lang="jp">
+        まず、下の部分で練習したい動詞の種類や活用形などを選んで、適当なボタンを押してください。
+        選んだのは、黄色になります。そして、「スタート」を押して、他のページでゲームが始まります。
+        頑張ってください！
+      </p>
 
-        <h1 lang="jp">カツくんというゲームへようこそ！</h1><br><br>
-        <p lang="jp">
-          まず、下の部分で練習したい動詞の種類や活用形などを選んで、適当なボタンを押してください。
-          選んだのは、黄色になります。そして、「スタート」を押して、他のページでゲームが始まります。
-          頑張ってください！
-        </p>
-        <br><br>
-      <div id="toggle">
-        <input id="toggle-en" type="radio"  name="toggle-lang" onclick="ToggleLanguage()" checked>
-        <label for="toggle-en">English</label>
-        <input id="toggle-jp" type="radio"  name="toggle-lang" onclick="ToggleLanguage()">
-        <label for="toggle-jp">日本語</label>
-      </div>
-    </div>
+  <div id="toggle">
+    <input id="toggle-en" type="radio"  name="toggle-lang" onclick="ToggleLanguage()" checked>
+    <label for="toggle-en">English</label>
+    <input id="toggle-jp" type="radio"  name="toggle-lang" onclick="ToggleLanguage()">
+    <label for="toggle-jp">日本語</label>
+  </div>
 
   <form id='game-params' action="{% url 'play' %}" method="get">
-    <h2 lang="en">Select the type(s)verbs you want...</h3>
-    <h2 lang="jp">まず、4つの種類の中で、何が練習したいの？</h3>
-    <div class="option">
-     <ul id="verb-types" class="checkbox-group" required>
-      <li><input id="ichidan" name="ichidan" type="checkbox" class='verb-type' value="True" checked>
-        <label for="ichidan">
-          <span lang="en">Ru-Verbs</span>
-          <span lang="jp">一段</span>
-        </label>
-      </li>
-      <li><input id="godan"  name="godan" type="checkbox" class='verb-type'value="True" checked>
-        <label for="godan">
-          <span lang="en">U-Verbs</span>
-          <span lang="jp">五段</span>
-        </label>
-      </li>
-      <li><input type="checkbox" name="suru"class='verb-type' id="suru" value="True" checked>
+
+  <div class="section"> 
+  <div class="option">
+    <h2 lang="en">Verb Types</h2>
+    <h2 lang="jp">動詞の分類</h2>
+   <ul id="verb-types" class="checkbox-group" required>
+    <li><input id="ichidan" name="ichidan" type="checkbox" class='verb-type' value="True" checked>
+      <label for="ichidan">
+        <span lang="en">Ru-Verbs</span>
+        <span lang="jp">一段</span>
+      </label>
+    </li>
+
+    <li><input id="godan"  name="godan" type="checkbox" class='verb-type'value="True" checked>
+      <label for="godan">
+        <span lang="en">U-Verbs</span>
+        <span lang="jp">五段</span>
+      </label>
+    </li>
+
+    <li><input type="checkbox" name="suru"class='verb-type' id="suru" value="True" checked>
       <label for="suru">
       <span lang="en">~Suru</span>
-      <span lang="jp">〜する</span></li>
+      <span lang="jp">〜する</span>
       </label>
-      <li><input type="checkbox" name="kuru" class='verb-type' id="kuru" value="True" checked>
+    </li>
+
+    <li><input type="checkbox" name="kuru" class='verb-type' id="kuru" value="True" checked>
       <label for="kuru">
       <span lang="en">~Kuru</span>
-      <span lang="jp">〜くる</label></li>
+      <span lang="jp">〜くる</span>
       </label>
+    </li>
     </ul>
-  </div>
-  <h2 lang="en">And which constructions you want to see!</h3>
-  <h2 lang="jp">そして、動詞の形も選べるよ！</h3>
+    </div>
+
   <div class="option">
+    <h2 lang="en">Constructions</h2>
+    <h2 lang="jp">練習でいる形態</h2>
     <div id="verb-forms" class="checkbox-group" required>
-      <div>
+      <div class="row">
       <input class="verb-form" type="checkbox" id="regular" name="regular" value="True" checked>
         <label for="regular">
           <span lang="en">Dictionary</span>
@@ -100,13 +105,13 @@
           <span lang="en">Potential</span>
           <span lang="jp">可能形（られる）</span>
         </label>
-      </div>
-      <div>
       <input class="verb-form" type="checkbox" id="passive" name="passive" value="True">
         <label for="passive">
           <span lang="en">Passive</span>
           <span lang="jp">受身形（られる）</span>
         </label>
+      </div>
+      <div class="row">
       <input class="verb-form" type="checkbox" id="causative" name="causative" value="True">
         <label for="causative">
           <span lang="en">Causative</span>
@@ -118,9 +123,12 @@
           <span lang="jp">使役受身（させられる）</span>
         </label>
       </div>
+      </div>
     </div>
   </div>
-  <div class="option" class="checkbox-group">
+
+  <div class="section">
+  <div class="option">
     <h2 lang="en">Now, pick the polarity and tense</h2>
     <h2 lang="jp">最後に、極性と時制について考えてから．．．</h2>
     <div id="verb-polarities" class="checkbox-group">
@@ -149,25 +157,26 @@
         </label>
       </li>
     </div>
-  </div>
-
-    <h2 lang="en">And finally choose which forms to practice!</h2>
-    <h2 lang="jp">特別な形を選んでください</h2>
-    <div id="conjugations" class="checkbox-group">
-    <div>
-      <input type="checkbox" class='conjugation' id="short" name="short" value="True" checked>
-      <label for="short">
-        <span lang="en">Plain / Short</span>
-        <span lang="jp">だ体</span>
-      </label>
-      <input type="checkbox" class='conjugation' id="polite" name="polite" value="True">
-      <label for="polite">
-        <span lang="en">Polite / ~Masu</span>
-        <span lang="jp">です/ます体</span>
-      </label>
     </div>
-    <div>
-      <input type="checkbox" class='conjugation' id="te" name="te" value="True">
+
+  <div class="option">
+    <h2 lang="en">Available Forms</h2>
+    <h2 lang="jp">特別な形態</h2>
+    <div id="verb-forms-2" class="checkbox-group" required>
+      <div class="row">
+      <input class="conjugation" type="checkbox" id="short" name="short" value="True" checked>
+        <label for="short">
+          <span lang="en">Plain / Short</span>
+          <span lang="jp">だ体</span>
+        </label>
+      <input type="checkbox" class='conjugation' id="polite" name="polite" value="True">
+        <label for="polite">
+          <span lang="en">Polite / ~Masu</span>
+          <span lang="jp">です/ます体</span>
+        </label>
+      </div>
+    <div class="row">
+     <input type="checkbox" class='conjugation' id="te" name="te" value="True">
       <label for="te">
         <span lang="en">~Te</span>
         <span lang="jp">て形</span>
@@ -182,8 +191,10 @@
         <span lang="en">~Ba</span>
         <span lang="jp">ば形</span>
       </label>
+      </div>
+      </div>
     </div>
-    </div>
+  </div>
 
     <div class="button">
       <br><br>
