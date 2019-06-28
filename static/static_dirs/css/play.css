@@ -1,12 +1,11 @@
 *{text-decoration:none; list-style:none; margin:0px; padding:0px; outline:none;}
 
-/*For the Header!*/
-header{width:100%; display:table; background-color: #001632; margin-bottom:50px; font-family: 'Open Sans', sans-serif;}
-nav{width:auto; float:left;;margin-left: 100px;}
+header{width:100%; position: fixed; display:table; position:fixed; background-color: #001632; z-index: 10; padding: 10px 0;}
+nav{width:auto; float:left;;margin-left: 50px; }
 nav ul{display:table; float:right;}
 nav ul li{float:left;}
 nav ul li:last-child{padding-right:0px;}
-nav ul li a{color:#ffffff; font-size:18px; padding: 25px 20px; display:inline-block; transition: all 0.5s ease 0s;}
+nav ul li a{color:#ffffff; font-size:22px; padding: 40px 25px; display:inline-block; transition: all 0.5s ease 0s;}
 nav ul li a:hover{background-color:#002e5b; color:#fde428; transition: all 0.5s ease 0s;}
 nav ul li a:hover i{color:#fde428; transition: all 0.5s ease 0s;}
 nav ul li a i{padding-right:10px; color:#002e5b; transition: all 0.5s ease 0s;}
@@ -63,37 +62,49 @@ h1 {padding: 20px 0px;}
 
 /*----------------------------------------------------------------------------------*/
 
-
-
 body{
-  background-color: #376FB6;
-  /* background-color:hsl(186,91%,90%); */
-  /* background-color:hsl(120,12%,50%); */
+  background: url("/static/resources/about/background_larger.svg") center center no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*transform: rotate(180deg);*/
 }
 
-.banner{
-  height: 50px;
-  position: top;
+nav #logo{
+  height: 100px;
+  width: auto;
+  margin: 0 auto;
+
+  padding: 0 20px;
 }
 
-#content-box{
+h1{
+  margin: 0 auto;
+  font-family: 'M PLUS 1p', sans-serif;
+  color: white;
+}
+
+hr{
+  margin: 30px 0;
+}
+
+#background{
+  background-color: rgba(0, 22, 50, .96);
+  margin: 0 auto;
+  /*padding: 100px 0;*/
+
+  position: absolute; 
+  top: 0; right: 0; bottom: 0; left: 0;
+
+
+}
+
+#contents{
+  margin: 200px auto;
   display: flex;
   flex-direction: row;
-}
-
-#left, #right{
-  width: 30%;
-  text-align: center;
-}
-
-#character{
-  width: 70%;
-  height: auto;
-  margin: auto;
-}
-#logo{
-  width:70%;
-  padding-top: 30px;
+  align-items: center;
 }
 
 #main{
@@ -106,9 +117,9 @@ body{
 
   /* position: relative; */
   margin: 0 auto;
-  top: 30px;
-  width: 40%;
-  padding: 20px 20px;
+  /*top: 30px;*/
+  width: 50%;
+  padding: 50px 20px;
 }
 
 #verb-box{
@@ -148,4 +159,30 @@ body{
   padding: 10px;
   font-size: 20px;
   background-color: #ffe44e;
+    cursor: pointer;
+
 }
+
+.btn:hover {
+  top: -10px;
+  box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+}
+
+#side{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+#character{
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+#show-answer{
+  width: 40%;
+  background-color: #E85252;
+  color: white;
+  margin: 0 auto;
+}
+

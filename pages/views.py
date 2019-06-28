@@ -94,7 +94,8 @@ def play(request):
                'polarity'    :request.session['html_params'][1],
                'tense'       :request.session['html_params'][2],
                'form'        :request.session['html_params'][3],
-               'character'   :character
+               'character'   :character,
+               'answer'      :request.session['current_verb'][3][0]
               }
 
     # Render the HTML template index.html with the data in the context variable
