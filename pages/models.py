@@ -31,7 +31,7 @@ class Verb(models.Model):
 
 	def __str__(self):
 		kanji_string = ""
-		split_verb = self.string.split(";")
+		split_verb = self.dictionary_string.split(";")
 
 		for substring in split_verb:
 			if "," in substring:
@@ -404,8 +404,9 @@ class Game(object):
 		verb = self.verbs[randrange(len(self.verbs))]
 		self.conjugator.set_verb(verb)
 
+		print(len(self.forms))
 		# Get a potential, passive, etc. construction
-		construction= self.constructions[randrange(len(self.forms))]
+		construction= self.constructions[randrange(len(self.constructions))]
 		self.conjugator.constructions[construction]()
 
 		# Get a formality and a polarity

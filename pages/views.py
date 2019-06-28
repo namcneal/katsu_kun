@@ -35,7 +35,7 @@ def params_to_html(param_list):
         return [param_list[0], polarity[param_list[1]], tense[param_list[2]],
                 forms[param_list[3]], "%s" %formality[param_list[4]]]
 
-    return [param_list[0],  polarity[param_list[1]], "",
+    return [param_list[0],  polarity[param_list[1]], tense[param_list[2]],
             forms[param_list[3]], ""]
 
 """
