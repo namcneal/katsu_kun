@@ -31,14 +31,15 @@ class Verb(models.Model):
 
 	def __str__(self):
 		kanji_string = ""
-		split_verb = self.dictionary_string.split(";")
+		split_verb = self.string.split(";")
 
-		for n in range(len(split_verb)):
-			# Handling the kanji, so we'll only grab one character
-			if n < len(split_verb) -1: kanji_string += split_verb[n][0]
+		for substring in split_verb:
+			if "," in substring:
+				# Split the substring based on comma and take only the first part
+				kanji_string += substring.split(",")[0]
+			else:
+				kanji_string += substring
 
-			# The last entry in the split verb is the okurigana
-			else: kanji_string += split_verb[n]
 		return kanji_string
 
 class Conjugator(object):
@@ -316,30 +317,6 @@ class Conjugator(object):
 				else:
 					self.string = self.string.replace('くる', 'こなければ')
 
-	def get_kanji_string(self):
-		kanji_string = ""
-		split_verb = self.string.split(";")
-
-		for n in range(len(split_verb)):
-			# Handling the kanji, so we'll only grab one character
-			if n < len(split_verb) -1: kanji_string += split_verb[n][0]
-
-			# The last entry in the split verb is the okurigana
-			else: kanji_string += split_verb[n]
-		return kanji_string
-
-	def get_kana_string(self):
-		kana_string = ""
-		split_verb = self.string.split(";")
-
-		for n in range(len(split_verb)):
-			# Handling the kanji, so we'll only grab one character
-			if n < len(split_verb) -1: kana_string += split_verb[n][2:]
-
-			# The last entry in the split verb is the okurigana
-			else: kana_string += split_verb[n]
-		return kana_string
-
 
 	def __str__(self):
 		kanji_string = ""
@@ -352,6 +329,33 @@ class Conjugator(object):
 			# The last entry in the split verb is the okurigana
 			else: kanji_string += split_verb[n]
 		return kanji_string
+
+
+	def get_kanji_string(self):
+		kanji_string = ""
+		split_verb = self.string.split(";")
+
+		for substring in split_verb:
+			if "," in substring:
+				# Split the substring based on comma and take only the first part
+				kanji_string += substring.split(",")[0]
+			else:
+				kanji_string += substring
+
+		return kanji_string
+
+	def get_kana_string(self):
+		kana_string = ""
+		split_verb = self.string.split(";")
+
+		for substring in split_verb:
+			if "," in substring:
+				# Split the substring based on comma and take only the first part
+				kana_string += substring.split(",")[1]
+			else:
+				kana_string += substring
+
+		return kana_string
 
 class Game(object):
 	managaged = False
@@ -416,7 +420,7 @@ class Game(object):
 		# Get a construction from standard, te, tara, ba
 		form  = self.forms[randrange(len(self.forms))]
 
-		self.conjugator.forms[form](polarity, tense)
+		self.conjugator.forms[form](polarity=="non-negative", tense=="non-past")
 
 		print("The answer is " + str(self.conjugator))
 		return(self.conjugator.original, self.conjugator.translation,
