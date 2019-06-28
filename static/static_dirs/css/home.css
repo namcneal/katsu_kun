@@ -81,14 +81,14 @@ p{
 #logo-banner{
 	padding: 50px 0px;
 	height: 500px;
-	background-color: #376FB6 ;
+	background-color: rgba(55,111,182,.99);
 
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
 
-	margin-bottom: 50px;
+	/*margin-bottom: 50px;*/
 }
 
  #logo-banner p{
