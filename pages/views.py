@@ -31,12 +31,11 @@ def params_to_html(param_list):
         param_list[0] = ""
     else:
         param_list[0] += "'s"
-    if param_list[3] in ['standard']:
-        return [param_list[0], polarity[param_list[1]], tense[param_list[2]],
-                forms[param_list[3]], "%s" %formality[param_list[4]]]
 
-    return [param_list[0],  polarity[param_list[1]], tense[param_list[2]],
-            forms[param_list[3]], ""]
+    if param_list[3] in ["te", "tara", "ba"]:
+        return[param_list[0],  polarity[param_list[1]], "", forms[param_list[3]]]
+
+    return [param_list[0],  polarity[param_list[1]], tense[param_list[2]], forms[param_list[3]]]
 
 """
 	Views for the various pages

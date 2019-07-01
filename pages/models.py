@@ -27,7 +27,7 @@ class Verb(models.Model):
 	dictionary_string = models.CharField(max_length = 30)
 	translation = models.CharField(max_length = 50)
 	verb_type   = models.CharField(max_length = 10, choices=VERB_TYPES)
-	genki_chapter = models.PositiveSmallIntegerField()
+	constructions = models.TextField()
 
 	def __str__(self):
 		kanji_string = ""
@@ -400,13 +400,23 @@ class Game(object):
 	def get_conjugation(self):
 		seed()
 
-		# Get a random verb
+		# Get a random verb from the database 
 		verb = self.verbs[randrange(len(self.verbs))]
+
+		# Set the verb in the conjugator
 		self.conjugator.set_verb(verb)
 
-		print(len(self.forms))
+
+		# Extract the possible conjugations from the string given in the database and add the regular conjugation
+		verb_constructions = verb.constructions.split(",")  + ["regular"]
+
+		# Intersect the constructions possible for this specific verb with those chosen by game parameters 
+		possible_constructions = list(set(verb_constructions) & set(self.constructions))
+
 		# Get a potential, passive, etc. construction
-		construction= self.constructions[randrange(len(self.constructions))]
+		construction = possible_constructions[randrange(len(possible_constructions))]
+
+		# Conjugate the verb into another verb construction
 		self.conjugator.constructions[construction]()
 
 		# Get a formality and a polarity
